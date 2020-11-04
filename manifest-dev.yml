@@ -1,0 +1,17 @@
+applications:
+  - name: sandbox-dev
+    instances: 2
+    memory: 1028M
+    disk_quota: 512M
+    stack: cflinux
+    random-route: true
+    buildpack: java_buildpack
+    routes:
+      - route: sanbox.fshtank.com
+    env:
+      SPRING_PROFILES_ACTIVE: dev
+      JAVA_OPTS: -Duser.timezone=UTC
+    path: /sanbox--.0.1-SNAPSHOT.jar
+
+services:
+  - config-server
