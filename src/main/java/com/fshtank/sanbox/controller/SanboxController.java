@@ -55,6 +55,26 @@ public class SanboxController extends BaseController {
     }
 
 
+    /**
+     * @return Collection of Collection<PbcOfertaVeiculo>
+     */
+    @RequestMapping(value = "/bitwise/{digit}",
+            method = RequestMethod.GET,
+            produces = {"application/vnd.status.v1+json;version=1.0",
+                    "application/vnd.status.v1+xml;version=1.0"}
+    )
+    public SanboxWebResponse getShiftDemo(@PathVariable("digit") int digitInt,
+                                          @RequestParam(value = "direction", required = true) String shiftDirection,
+                                          @RequestParam(value = "shift", required = true) Integer shiftInt)  {
+        sanboxWebRequest.setDigitToShift(digitInt);
+        sanboxWebRequest.setShiftOperator(shiftInt);
+        sanboxWebRequest.setShiftDirection(shiftDirection);
+
+        SanboxWebResponse sanboxWebResponse = sbxService.doShiftThing(sanboxWebRequest);
+
+        return sanboxWebResponse;
+    }
+
 
 
     @RequestMapping(value = "alive",
